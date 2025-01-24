@@ -15,13 +15,18 @@ RUN rm /var/lib/dpkg/info/libc-bin.* \
 
 RUN apt-get install -y python3-dev python3-pip
 
-COPY ros2_ws /home/ros2_ws
-
 # Update rosdep
 RUN rosdep update
 
+# Install Demo
+RUN apt-get install ros-${ROS_DISTRO}-demo-nodes-py -y
+
+# Copy in mavros
+COPY ros2_ws/src/rov-25/src/pi/mavros /home/ros2_ws/src/rov-25/src/pi/mavros/
+
 # Install deps for mavros
 RUN cd /home/ros2_ws/ \
+    && ls \
     && . "/opt/ros/${ROS_DISTRO}/setup.sh" \
     && rosdep install --from-paths src/rov-25/src/pi/mavros --ignore-src -r -y
 
@@ -31,6 +36,9 @@ RUN cd /home/ros2_ws/ \
     && colcon build --symlink-install --packages-select libmavconn mavros_msgs mavros mavros_extras \
     && . "/home/ros2_ws/install/setup.sh" \
     && ros2 run mavros install_geographiclib_datasets.sh
+
+#  Copy in rov-25
+COPY ros2_ws /home/ros2_ws
 
 # Install deps
 RUN cd /home/ros2_ws/ \
