@@ -1,3 +1,6 @@
 [submodule "bluerov2"]
 	path = ros2_ws/src/bluerov2
 	url = https://github.com/itskalvik/bluerov2
+[submodule "ros2_ws/src/rov-25"]
+	path = ros2_ws/src/rov-25
+	url = git@github.com:CWRUbotix/rov-25.git

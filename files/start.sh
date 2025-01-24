@@ -14,7 +14,7 @@ tmux split-window -h
 tmux select-pane -t 0
 tmux split-window -h
 
-#tmux send-keys -t 0 "/ros_entrypoint.sh ros2 launch bluerov2_control mavros.launch" Enter
+#tmux send-keys -t 0 "/ros_entrypoint.sh ros2 launch pi_main pi_launch.py" Enter
 tmux send-keys -t 0 "/ros_entrypoint.sh" Enter
 tmux send-keys -t 1 "/ros_entrypoint.sh" Enter
 tmux send-keys -t 2 "/ros_entrypoint.sh" Enter
