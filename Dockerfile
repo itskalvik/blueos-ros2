@@ -1,4 +1,4 @@
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=jazzy
 FROM ros:$ROS_DISTRO-ros-base
 
 RUN rm /var/lib/dpkg/info/libc-bin.* \
@@ -46,16 +46,20 @@ LABEL permissions='{\
 }'
 LABEL authors='[\
   {\
-    "name": "Kalvik Jakkala",\
-    "email": "itskalvik@gmail.com"\
+    "name": "Noah Mollerstuen",\
+    "email": "noah@mollerstuen.com"\
+  },\
+  {\
+    "name": "Michael Carlstrom",\
+    "email": "rmc@carlstrom.com"\
   }\
 ]'
 LABEL company='{\
   "about": "",\
-  "name": "ItsKalvik",\
-  "email": "itskalvik@gmail.com"\
+  "name": "CWRUbotix",\
+  "email": "robotics-exec@case.edu"\
 }'
-LABEL readme="https://raw.githubusercontent.com/itskalvik/blueos-ros2/master/README.md"
+LABEL readme="https://github.com/CWRUbotix/rov-blueos-extension/blob/main/README.md"
 LABEL type="other"
 LABEL tags='[\
   "ros2",\
