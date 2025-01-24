@@ -6,13 +6,12 @@ RUN rm /var/lib/dpkg/info/libc-bin.* \
     && apt-get update \
     && apt-get -y install libc-bin \
     && apt-get install -q -y --no-install-recommends \
-    tmux nano nginx wget netcat \
-    ros-${ROS_DISTRO}-mavros ros-${ROS_DISTRO}-mavros-extras ros-${ROS_DISTRO}-mavros-msgs \
-    python3-dev python3-pip \
+    tmux nano nginx wget
+RUN apt-get install -y ros-${ROS_DISTRO}-mavros ros-${ROS_DISTRO}-mavros-extras ros-${ROS_DISTRO}-mavros-msgs
+RUN apt-get install -y python3-dev python3-pip \
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install --no-cache-dir setuptools pip packaging -U
+    && rm -rf /var/lib/apt/lists/*
 
 COPY ros2_ws /home/ros2_ws
 RUN cd /home/ros2_ws/ \
