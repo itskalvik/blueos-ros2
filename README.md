@@ -1,4 +1,3 @@
-Below is the updated documentation with the additional note regarding the **SERVOx_Function** setting:
 # [BlueOS ROS2 Extension](https://github.com/itskalvik/blueos-ros2)
 
 This extension enables controlling an ArduPilot-based vehicle (BlueBoat, BlueROV) via [ROS2](https://github.com/ros2).
