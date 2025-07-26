@@ -1,3 +1,12 @@
 [submodule "ros2_ws/src/mavros_control"]
 	path = ros2_ws/src/mavros_control
 	url = https://github.com/itskalvik/mavros_control
+[submodule "ros2_ws/src/bluerobotics_sonar"]
+	path = ros2_ws/src/bluerobotics_sonar
+	url = https://github.com/itskalvik/bluerobotics_sonar
+[submodule "ros2_ws/src/sonoptix_sonar"]
+	path = ros2_ws/src/sonoptix_sonar
+	url = https://github.com/itskalvik/sonoptix_sonar
+[submodule "ros2_ws/src/gscam2"]
+	path = ros2_ws/src/gscam2
+	url = https://github.com/clydemcqueen/gscam2
