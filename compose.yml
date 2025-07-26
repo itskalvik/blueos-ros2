@@ -1,0 +1,18 @@
+services:
+  ros2:
+    image: itskalvik/blueos-ros2:0.0.3
+    build:
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
+      context: ./
+
+    environment:
+      - TERM=xterm-256color
+      - XDG_RUNTIME_DIR
+
+    volumes:
+      - ./ros2_ws/:/home/ros2_ws/
+    
+    network_mode: host
+    privileged: true

@@ -1,52 +1,56 @@
 # [BlueOS ROS2 Extension](https://github.com/itskalvik/blueos-ros2)
 
-This extension enables controlling an ArduPilot-based vehicle (BlueBoat, BlueROV) via [ROS2](https://github.com/ros2)
+The BlueOS ROS2 Extension bridges the [BlueOS](https://bluerobotics.com/blueos-conversion/) and [ROS2](https://github.com/ros2) ecosystems, enabling advanced robotic applications and research on ArduPilot-based vehicles such as the BlueBoat and BlueROV2.
 
-The extension includes the following packages:
+This extension provides drivers and tools for controlling vehicles and visualizing onboard sensor data. It simplifies the process of setting up a ROS 2 environment for marine robotics by offering pre-configured packages for sonar, cameras, and vehicle control—ready to use out of the box.
 
-- [MAVROS](https://github.com/mavlink/mavros): Includes a launch file to communicate with the flight controller (vehicle)
+In addition, it includes a web-based terminal for convenient access to the ROS 2 environment and integrates seamlessly with Foxglove for browser-based data visualization.
 
-- [mavros_control](https://github.com/itskalvik/mavros_control): Includes a python script to control the vehicle using GPS-based waypoints (BlueBoat) and RC-control (BlueROV2) via mavros
+# 🚀 Features
 
-- [Foxglove ](https://docs.foxglove.dev/docs): Web-based RViz for visualizing ROS2 data
+This extension includes the following ROS 2 packages:
 
-The extension also mounts the following folder on the computer running [BlueOS](https://blueos.cloud/) to the home directory folder in the extension's Docker container, which can be used to store files that need to persist across reboots, such as a ROS2 workspace with custom code:
+- **[mavros_control](https://github.com/itskalvik/mavros_control)**
 
-```/usr/blueos/extensions/ros2/``` -> ```/home/persistent_ws/```
+  A Python-based control interface using [MAVROS](https://github.com/mavlink/mavros). Supports GPS waypoint navigation (BlueBoat) and RC control (BlueROV2). Includes methods for arming/disarming, takeoff/landing, home location setting, and waypoint following. Skip the boilerplate—subclass or reuse it directly!
 
-## Setup
-This extension works only on 64-bit version of [BlueOS](https://github.com/bluerobotics/BlueOS). You can get the 64-bit image of BlueOS for Raspberry Pi from [here](https://github.com/bluerobotics/BlueOS/releases/download/1.4.0-beta.14/BlueOS-raspberry-linux-arm64-v8-bookworm-pi5.zip).
+- **[gscam2](https://github.com/clydemcqueen/gscam2)**
 
-The ROS2 extension extension can then be installed from the BlueOS app store. 
+  A ROS 2 camera driver for GStreamer-based video streams. Supports intra-process communication for performance.
 
-## Getting Started
-The [mavros_control](https://github.com/itskalvik/mavros_control) package includes a demo launch file that starts the ```controller``` node. The node arms the vehicle, moves it, and then disarms it. Run the following command in the extension's terminal to start it:
+- **[bluerobotics_sonar](https://github.com/itskalvik/bluerobotics_sonar)**
 
-```
-ros2 launch mavros_control demo.launch.py
-```
+  Drivers for the Blue Robotics Ping1D altimeter and Ping360 scanning sonar. Includes nodes for hardware interfacing and data visualization.
 
-## Parameters
-You can control the following extension parameters by running the following command in the terminal provided by the ros2 extension:
+- **[sonoptix_sonar](https://github.com/itskalvik/sonoptix_sonar)**
 
-```
-export <parameter_name>=<parameter_value>
-```
+  Provides drivers and data processing for the Sonoptix Echo sonar. Captures raw data and converts it into polar images for visualization.
 
-The parameters reset to their default values after rebooting. They can be made permanent by configuring the parameters using the app environment variables on the BlueOS extensions page in pirate mode.
+- **[ros-foxglove-bridge](https://app.foxglove.dev/)**
 
-### Available Parameters: 
+  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface. Compatible with the BlueOS Foxglove plugin.
 
-* ```NAVIGATION_TYPE``` (```default: 0```):
-    - If ```0```: Uses global position based navigation (assumes access to GPS)
-    - If ```1```: Uses raw rc controls for navigation
+## 📋 Prerequisites
 
-* ```FOXGLOVE``` (```default: True```):
-    - Starts Foxglove bridge when set to ```True```
-    - You can access it from a web browser at [https://app.foxglove.dev/](https://app.foxglove.dev/). Use the open connection feature and change the address from ```localhost``` to the ```IP address``` of the vehicle
+- A 64-bit version of [BlueOS](https://github.com/bluerobotics/BlueOS) is required. 
+Get the latest image for Raspberry Pi from the [BlueOS releases](https://github.com/bluerobotics/BlueOS/releases/).
 
-## Building the Docker Container Locally
-First, setup buildx to build the containers for both arm64 and amd64 platforms: 
+
+## 🧰 Installation
+You can install the ROS 2 Extension directly from the BlueOS App Store.
+
+## ⚙️ Usage
+- BlueOS automatically launches the extension on boot.
+
+- The extension's terminal is accessible from the left-hand panel of the BlueOS interface.
+
+- The extension mounts the host directory ```/usr/blueos/extensions/ros2/``` to the container path ```/home/persistent_ws/```
+  Use this folder to store files that should persist across reboots, such as custom ROS 2 workspaces or configurations.
+
+## 🛠️ Building the Docker Container Locally
+To build the container for multiple architectures (`arm64`, `amd64`), follow these steps:
+
+### 1. Set up a multi-architecture builder:
 
 ```bash
 docker buildx create --name multi-arch \
@@ -55,19 +59,10 @@ docker buildx create --name multi-arch \
 docker buildx use multi-arch
 ```
 
-Next, clone the repo and build the container, replace ```<tag>``` with your own tag:
+### 2. Clone the repository and build the container:
 
 ```bash
 git clone --recurse-submodules https://github.com/itskalvik/blueos-ros2
 cd blueos-ros2
-docker build --platform linux/amd64,linux/arm64 -t <tag> . --push
+docker compose build
 ```
-
-## FAQ
-To control the vehicle using RC-control, please ensure that the ```SYSID_MYGCS``` parameter is set to ```1``` through the BlueOS Autopilot Parameters Tab.
-You can also update ```SYSID_MYGCS``` from the ROS2 extension's terminal by runnning the following command:
-```
-ros2 param set /mavros/param SYSID_MYGCS 1
-```
-
-Note that once the ```SYSID_MYGCS``` is changed, you won't be able to control the vehicle using Cockpit anymore until you reset the parameter to its default value: ```255```
