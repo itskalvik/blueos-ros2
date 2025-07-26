@@ -1,5 +1,7 @@
 # [BlueOS ROS2 Extension](https://github.com/itskalvik/blueos-ros2)
 
+![](.logo.png)
+
 The BlueOS ROS2 Extension bridges the [BlueOS](https://bluerobotics.com/blueos-conversion/) and [ROS2](https://github.com/ros2) ecosystems, enabling advanced robotic applications and research on ArduPilot-based vehicles such as the BlueBoat and BlueROV2.
 
 This extension provides drivers and tools for controlling vehicles and visualizing onboard sensor data. It simplifies the process of setting up a ROS 2 environment for marine robotics by offering pre-configured packages for sonar, cameras, and vehicle control—ready to use out of the box.
