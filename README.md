@@ -1,5 +1,3 @@
-# [BlueOS ROS2 Extension](https://github.com/itskalvik/blueos-ros2)
-
 <p align="center">
 <img src=".assets/logo.png" width="75%"/> 
 </p>
