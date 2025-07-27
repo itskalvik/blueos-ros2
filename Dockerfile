@@ -1,5 +1,6 @@
 ARG ROS_DISTRO=humble
 FROM ros:$ROS_DISTRO-ros-base
+WORKDIR /home/
 
 # Install general packages (including mavros and foxglove)
 RUN rm /var/lib/dpkg/info/libc-bin.* \
