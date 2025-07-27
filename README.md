@@ -41,6 +41,11 @@ Get the latest image for Raspberry Pi from the [BlueOS releases](https://github.
 ## 🧰 Installation
 You can install the ROS 2 Extension directly from the BlueOS App Store.
 
+<p align="center">
+<img src=".assets/installation.gif" width="100%"/> 
+</p>
+
+
 ## ⚙️ Usage
 - BlueOS automatically launches the extension on boot.
 
@@ -48,6 +53,10 @@ You can install the ROS 2 Extension directly from the BlueOS App Store.
 
 - The extension mounts the host directory ```/usr/blueos/extensions/ros2/``` to the container path ```/home/persistent_ws/```
   Use this folder to store files that should persist across reboots, such as custom ROS 2 workspaces or configurations.
+
+<p align="center">
+<img src=".assets/usage.gif" width="100%"/> 
+</p>
 
 ## 🛠️ Building the Docker Container Locally
 To build the container for multiple architectures (`arm64`, `amd64`), follow these steps:
