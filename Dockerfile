@@ -60,8 +60,6 @@ RUN bash /install-ttyd.sh && rm /install-ttyd.sh
 # Copy configuration files
 COPY files/nginx.conf /etc/nginx/nginx.conf
 COPY files/index.html /usr/share/ttyd/index.html
-COPY files/start-nginx.sh /start-nginx.sh
-RUN chmod +x /start-nginx.sh
 
 # Copy start script and other files
 RUN mkdir -p /site
