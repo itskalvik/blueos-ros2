@@ -1,5 +1,6 @@
 services:
   ros2:
+    image: itskalvik/blueos-ros2:beta
     build:
       context: ./
       dockerfile: Dockerfile
@@ -20,6 +21,7 @@ services:
       - "8080:8080"
       - "9000:9000"
 
+    #network_mode: host
     privileged: true
     tty: true
     stdin_open: true

@@ -40,9 +40,7 @@ RUN cd /home/ \
 # Build ROS2 workspace with remaining packages
 COPY ros2_ws /home/ros2_ws
 RUN cd /home/ros2_ws/ \
-    && if [ -f src/mavros_control/requirements.txt ] && [ -s src/mavros_control/requirements.txt ]; then \
-        python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt; \
-    fi \
+    && python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt \
     && git clone https://github.com/ptrmu/ros2_shared.git --depth 1 src/ros2_shared \
     && apt-get update \
     && rosdep install --from-paths src --ignore-src -r -y \
@@ -52,7 +50,8 @@ RUN cd /home/ros2_ws/ \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "source /ros_entrypoint.sh" >> ~/.bashrc
+    && echo "source /ros_entrypoint.sh" >> ~/.bashrc \
+    && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc
 
 # Setup ttyd for web terminal interface
 ADD files/install-ttyd.sh /install-ttyd.sh
