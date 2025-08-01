@@ -1,11 +1,11 @@
 services:
   ros2:
-    image: itskalvik/blueos-ros2:beta
     build:
+      context: ./
+      dockerfile: Dockerfile
       platforms:
         - "linux/amd64"
         - "linux/arm64"
-      context: ./
 
     environment:
       - TERM=xterm-256color
@@ -13,6 +13,13 @@ services:
 
     volumes:
       - ./ros2_ws/:/home/ros2_ws/
-    
-    network_mode: host
+
+    ports:
+      - "4717:4717"
+      - "88:88"
+      - "8080:8080"
+      - "9000:9000"
+
     privileged: true
+    tty: true
+    stdin_open: true

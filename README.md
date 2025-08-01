@@ -31,7 +31,7 @@ This extension includes the following ROS 2 packages:
 
 - **[ros-foxglove-bridge](https://app.foxglove.dev/)**
 
-  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface. You can access it from a web browser at [https://app.foxglove.dev/](https://app.foxglove.dev/). Use the open connection feature and change the address from ```localhost``` to the ```IP address``` of the vehicle.
+  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface. Compatible with the BlueOS Foxglove plugin.
 
 ## 📋 Prerequisites
 

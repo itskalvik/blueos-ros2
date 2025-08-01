@@ -3,14 +3,37 @@
 # Immediately exit on errors
 set -e
 
-LOCAL_BINARY_PATH="/usr/bin/ttyd"
-VERSION=1.7.3
+echo "Building ttyd from source for better compatibility..."
 
-# By default we install armv7
-REMOTE_BINARY_URL="https://github.com/tsl0922/ttyd/releases/download/${VERSION}/ttyd.armhf"
-if [[ "$(uname -m)" == "x86_64"* ]]; then
-    REMOTE_BINARY_URL="https://github.com/tsl0922/ttyd/releases/download/${VERSION}/ttyd.x86_64"
-fi
+# Install build dependencies
+apt-get update
+apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    libssl-dev \
+    libjson-c-dev \
+    libwebsockets-dev \
+    pkg-config
 
-wget "$REMOTE_BINARY_URL" -O "$LOCAL_BINARY_PATH"
-chmod +x "$LOCAL_BINARY_PATH"
+# Clone ttyd repository
+cd /tmp
+git clone https://github.com/tsl0922/ttyd.git
+cd ttyd
+
+# Build ttyd
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+
+# Install ttyd
+cp ttyd /usr/bin/ttyd
+chmod +x /usr/bin/ttyd
+
+# Clean up
+cd /
+rm -rf /tmp/ttyd
+
+echo "ttyd built and installed successfully!"
+ttyd --version

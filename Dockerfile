@@ -40,7 +40,9 @@ RUN cd /home/ \
 # Build ROS2 workspace with remaining packages
 COPY ros2_ws /home/ros2_ws
 RUN cd /home/ros2_ws/ \
-    && python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt \
+    && if [ -f src/mavros_control/requirements.txt ] && [ -s src/mavros_control/requirements.txt ]; then \
+        python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt; \
+    fi \
     && git clone https://github.com/ptrmu/ros2_shared.git --depth 1 src/ros2_shared \
     && apt-get update \
     && rosdep install --from-paths src --ignore-src -r -y \
@@ -50,19 +52,23 @@ RUN cd /home/ros2_ws/ \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "source /ros_entrypoint.sh" >> ~/.bashrc \
-    && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc
+    && echo "source /ros_entrypoint.sh" >> ~/.bashrc
 
 # Setup ttyd for web terminal interface
 ADD files/install-ttyd.sh /install-ttyd.sh
 RUN bash /install-ttyd.sh && rm /install-ttyd.sh
 COPY files/tmux.conf /etc/tmux.conf
 
+# Copy configuration files
+COPY files/nginx.conf /etc/nginx/nginx.conf
+COPY files/index.html /usr/share/ttyd/index.html
+COPY files/start-nginx.sh /start-nginx.sh
+RUN chmod +x /start-nginx.sh
+
+# Copy start script and other files
 RUN mkdir -p /site
 COPY files/register_service /site/register_service
-COPY files/nginx.conf /etc/nginx/nginx.conf
-
-ADD files/start.sh /start.sh
+COPY files/start.sh /start.sh
 
 # Add docker configuration
 LABEL version="0.0.3"
