@@ -47,7 +47,7 @@ else
 fi
 
 # Start ttyd web terminal with simple configuration
-echo "Starting ttyd web terminal on port 9000..."
+echo "Starting ttyd web terminal on port 4718..."
 
 # Test ttyd installation first
 echo "Testing ttyd installation..."
@@ -81,7 +81,7 @@ chmod +x /tmp/ttyd-shell.sh
 
 # Start ttyd with login shell for better interactive terminal handling
 echo "Starting ttyd with login shell for enhanced terminal experience..."
-ttyd -p 9000 -d 1 --writable -t fontSize=14 -t fontFamily="Monaco, Menlo, Ubuntu Mono, monospace" -t cursorBlink=true -t cursorStyle=block -t enableTrzsz=true -t enableZmodem=true -t enableSixel=true -t enableReconnect=true -t enableResize=true /bin/bash -l &
+ttyd -p 4718 -d 1 --writable -t fontSize=14 -t fontFamily="Monaco, Menlo, Ubuntu Mono, monospace" -t cursorBlink=true -t cursorStyle=block -t enableTrzsz=true -t enableZmodem=true -t enableSixel=true -t enableReconnect=true -t enableResize=true /bin/bash -l &
 TTYD_PID=$!
 
 # Wait a moment for ttyd to start
@@ -91,17 +91,17 @@ sleep 2
 if kill -0 $TTYD_PID 2>/dev/null; then
     echo "ttyd started successfully with PID: $TTYD_PID"
     
-    # Wait a moment and check if ttyd is listening on port 9000
+    # Wait a moment and check if ttyd is listening on port 4718
     sleep 3
-    if ss -tuln | grep -q ":9000 "; then
-        echo "✓ ttyd is listening on port 9000"
+    if ss -tuln | grep -q ":4718 "; then
+        echo "✓ ttyd is listening on port 4718"
     else
-        echo "WARNING: ttyd is not listening on port 9000"
+        echo "WARNING: ttyd is not listening on port 4718"
     fi
     
     # Test ttyd with curl
     echo "Testing ttyd HTTP endpoint..."
-    if curl -s http://localhost:9000 > /dev/null 2>&1; then
+    if curl -s http://localhost:4718 > /dev/null 2>&1; then
         echo "✓ ttyd HTTP endpoint is responding"
     else
         echo "WARNING: ttyd HTTP endpoint is not responding"
@@ -113,7 +113,7 @@ fi
 
 echo "Container startup complete!"
 echo "XTerm Web Terminal available at: http://localhost:4717"
-echo "Direct ttyd terminal available at: http://localhost:9000"
+echo "Direct ttyd terminal available at: http://localhost:4718"
 echo "Features: Multi-tab, Copy-paste, Advanced terminal, ROS2 integration"
 
 # Keep container running
