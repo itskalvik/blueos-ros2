@@ -31,7 +31,7 @@ This extension includes the following ROS 2 packages:
 
 - **[ros-foxglove-bridge](https://app.foxglove.dev/)**
 
-  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface. Compatible with the BlueOS Foxglove plugin.
+  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface.
 
 ## 📋 Prerequisites
 
