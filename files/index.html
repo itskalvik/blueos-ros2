@@ -258,7 +258,12 @@
   </head>
   <body>
     <div class="header">
-      <div class="title">🚀 Advanced ROS2 Terminal</div>
+      <div class="tab-container" id="tabContainer">
+        <!-- Tabs will be created here -->
+        <button class="tab new-tab" onclick="terminal.createNewTab()">
+          + New Tab
+        </button>
+      </div>
       <div class="controls">
         <button class="btn" onclick="reloadActiveTerminal()">🔄 Reload</button>
         <button
@@ -272,13 +277,6 @@
           ❌ Close All
         </button>
       </div>
-    </div>
-
-    <div class="tab-container" id="tabContainer">
-      <!-- Tabs will be created here -->
-      <button class="tab new-tab" onclick="terminal.createNewTab()">
-        + New Tab
-      </button>
     </div>
 
     <div class="terminal-container" id="terminalContainer">
