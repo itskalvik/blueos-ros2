@@ -1,6 +1,6 @@
 services:
   ros2:
-    image: itskalvik/blueos-ros2:0.0.3
+    image: itskalvik/blueos-ros2:beta
     build:
       platforms:
         - "linux/amd64"
