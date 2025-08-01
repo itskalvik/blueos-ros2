@@ -56,7 +56,6 @@ RUN cd /home/ros2_ws/ \
 # Setup ttyd for web terminal interface
 ADD files/install-ttyd.sh /install-ttyd.sh
 RUN bash /install-ttyd.sh && rm /install-ttyd.sh
-COPY files/tmux.conf /etc/tmux.conf
 
 # Copy configuration files
 COPY files/nginx.conf /etc/nginx/nginx.conf
