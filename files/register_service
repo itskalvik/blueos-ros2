@@ -1,10 +1,48 @@
 {
-    "name": "ROS2",
-    "description": "Robot Operating System 2 (ROS2) extension for BlueOS",
-    "icon": "mdi-dots-grid",
-    "company": "ItsKalvik",
-    "version": "0.0.3",
-    "new_page": true,
-    "webpage": "https://github.com/itskalvik/blueos-ros2",
-    "api": "/v1.0/docs"
+  "name": "ROS2 Terminal",
+  "description": "Multi-tab web terminal for ROS2 development with BlueOS integration",
+  "icon": "mdi-console",
+  "company": "ItsKalvik",
+  "version": "0.0.3",
+  "new_page": true,
+  "webpage": "https://github.com/itskalvik/blueos-ros2",
+  "api": "/v1.0/docs",
+  "port": 4717,
+  "endpoints": [
+    {
+      "name": "Terminal Interface",
+      "url": "/",
+      "description": "Main multi-tab terminal interface with advanced features"
+    },
+    {
+      "name": "WebSocket Terminal",
+      "url": "/ws",
+      "description": "Primary WebSocket connection for real-time terminal communication"
+    },
+    {
+      "name": "Direct ttyd Interface",
+      "url": "/ttyd/",
+      "description": "Direct ttyd terminal interface (proxied)"
+    },
+    {
+      "name": "ttyd WebSocket",
+      "url": "/ttyd/ws",
+      "description": "Alternative WebSocket connection through ttyd path"
+    },
+    {
+      "name": "Token Endpoint",
+      "url": "/token",
+      "description": "ttyd token authentication endpoint"
+    },
+    {
+      "name": "Health Check",
+      "url": "/health",
+      "description": "Service health status and diagnostics"
+    },
+    {
+      "name": "API Documentation",
+      "url": "/docs",
+      "description": "Service API documentation and usage guide"
+    }
+  ]
 }
