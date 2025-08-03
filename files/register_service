@@ -5,5 +5,6 @@
     "company": "ItsKalvik",
     "version": "0.0.4",
     "new_page": true,
-    "webpage": "https://github.com/itskalvik/blueos-ros2"
+    "webpage": "https://github.com/itskalvik/blueos-ros2",
+    "api": ""
 }
