@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Advanced ROS2 Terminal</title>
+    <title>ROS2 - BlueOS</title>
     <style>
       * {
         margin: 0;
@@ -21,7 +21,7 @@
 
       .header {
         background: #2d2d2d;
-        padding: 10px;
+        padding: 0px;
         border-bottom: 1px solid #404040;
         display: flex;
         justify-content: space-between;
@@ -130,7 +130,7 @@
       }
 
       .terminal-container {
-        height: calc(100vh - 120px);
+        height: calc(100vh - 65px);
         position: relative;
       }
 
@@ -266,13 +266,6 @@
       </div>
       <div class="controls">
         <button class="btn" onclick="reloadActiveTerminal()">🔄 Reload</button>
-        <button
-          class="btn"
-          onclick="terminal.renameActiveTab()"
-          title="Rename active tab (Ctrl+R)"
-        >
-          ✏️ Rename
-        </button>
         <button class="btn danger" onclick="closeAllTabs()">
           ❌ Close All
         </button>
@@ -346,10 +339,6 @@
                 case "w":
                   e.preventDefault();
                   this.closeActiveTab();
-                  break;
-                case "r":
-                  e.preventDefault();
-                  this.renameActiveTab();
                   break;
               }
             }
@@ -502,6 +491,7 @@
               }
             });
             this.tabs = [];
+            this.tabCounter = 0
             document
               .querySelectorAll(".tab:not(.new-tab)")
               .forEach((tab) => tab.remove());

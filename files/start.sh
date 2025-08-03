@@ -114,7 +114,6 @@ fi
 echo "Container startup complete!"
 echo "XTerm Web Terminal available at: http://localhost:4717"
 echo "Direct ttyd terminal available at: http://localhost:4718"
-echo "Features: Multi-tab, Copy-paste, Advanced terminal, ROS2 integration"
 
 # Keep container running
 sleep infinity
