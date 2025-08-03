@@ -15,6 +15,9 @@ apt-get install -y --no-install-recommends \
     libjson-c-dev \
     libwebsockets-dev \
     pkg-config
+apt-get autoremove -y
+apt-get clean -y
+rm -rf /var/lib/apt/lists/*
 
 # Clone ttyd repository
 cd /tmp

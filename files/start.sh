@@ -63,7 +63,7 @@ pkill ttyd 2>/dev/null || true
 sleep 1
 
 # Fix .bashrc to remove the problematic ROS2 workspace setup line
-sed -i '/source \/home\/ros2_ws\/install\/setup.sh/d' /root/.bashrc
+sed -i '/source \/root\/ros2_ws\/install\/setup.sh/d' /root/.bashrc
 
 # Create a wrapper script for ttyd with proper environment
 cat > /tmp/ttyd-shell.sh << 'EOF'

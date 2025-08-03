@@ -1,6 +1,6 @@
 ARG ROS_DISTRO=humble
 FROM ros:$ROS_DISTRO-ros-base
-WORKDIR /home/
+WORKDIR /root/
 
 # Install general packages (including mavros and foxglove)
 RUN rm /var/lib/dpkg/info/libc-bin.* \
@@ -31,15 +31,15 @@ RUN apt-get update \
     && pip3 install --no-cache-dir setuptools==79.0.1 pip packaging -U
 
 # Install ping-python from source (Newer commits don't seem to work with the ping1d)
-RUN cd /home/ \
+RUN cd /root/ \
     && git clone https://github.com/bluerobotics/ping-python.git -b deployment \
     && cd ping-python \
     && git checkout 3d41ddd \
     && python3 setup.py install --user
 
 # Build ROS2 workspace with remaining packages
-COPY ros2_ws /home/ros2_ws
-RUN cd /home/ros2_ws/ \
+COPY ros2_ws /root/ros2_ws
+RUN cd /root/ros2_ws/ \
     && python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt \
     && git clone https://github.com/ptrmu/ros2_shared.git --depth 1 src/ros2_shared \
     && apt-get update \
@@ -51,7 +51,7 @@ RUN cd /home/ros2_ws/ \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && echo "source /ros_entrypoint.sh" >> ~/.bashrc \
-    && echo "source /home/ros2_ws/install/setup.sh " >> ~/.bashrc
+    && echo "source /root/ros2_ws/install/setup.sh " >> ~/.bashrc
 
 # Setup ttyd for web terminal interface
 ADD files/install-ttyd.sh /install-ttyd.sh
@@ -73,7 +73,7 @@ LABEL permissions='{\
   "HostConfig": {\
     "Binds": [\
       "/dev:/dev:rw",\
-      "/usr/blueos/extensions/ros2/:/home/persistent_ws/:rw"\
+      "/usr/blueos/extensions/ros2/:/root/persistent_ws/:rw"\
     ],\
     "Privileged": true,\
     "NetworkMode": "host"\

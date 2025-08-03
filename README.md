@@ -52,7 +52,7 @@ You can install the ROS 2 Extension directly from the BlueOS App Store.
 
 - The extension's terminal is accessible from the left-hand panel of the BlueOS interface.
 
-- The extension mounts the host directory ```/usr/blueos/extensions/ros2/``` to the container path ```/home/persistent_ws/```
+- The extension mounts the host directory ```/usr/blueos/extensions/ros2/``` to the container path ```/root/persistent_ws/```
   Use this folder to store files that should persist across reboots, such as custom ROS 2 workspaces or configurations.
 
 <p align="center">
