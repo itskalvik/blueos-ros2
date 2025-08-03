@@ -9,6 +9,10 @@ This extension provides drivers and tools for controlling vehicles and visualizi
 
 In addition, it includes a web-based terminal for convenient access to the ROS 2 environment and integrates seamlessly with Foxglove for browser-based data visualization.
 
+<p align="center">
+<img src=".assets/demo.gif" width="100%"/> 
+</p>
+
 # 🚀 Features
 
 This extension includes the following ROS 2 packages:
