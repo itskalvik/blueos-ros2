@@ -1,5 +1,6 @@
-ARG ROS_DISTRO=humble
+ARG ROS_DISTRO=jazzy
 FROM ros:$ROS_DISTRO-ros-base
+ENV DEBIAN_FRONTEND=noninteractive PIP_BREAK_SYSTEM_PACKAGES=1
 WORKDIR /root/
 
 # Install general packages (including mavros and foxglove)
@@ -8,15 +9,14 @@ RUN rm /var/lib/dpkg/info/libc-bin.* \
     && apt-get update \
     && apt-get install libc-bin \
     && apt-get install -q -y --no-install-recommends \
-    tmux nano nginx wget netcat \
+    tmux nano nginx wget \
     ros-${ROS_DISTRO}-mavros ros-${ROS_DISTRO}-mavros-extras ros-${ROS_DISTRO}-mavros-msgs \
     ros-${ROS_DISTRO}-geographic-msgs \
     ros-${ROS_DISTRO}-foxglove-bridge \
-    python3-dev python3-pip \
+    python3-dev python3-pip python3-venv \
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install --no-cache-dir setuptools pip packaging -U
+    && rm -rf /var/lib/apt/lists/*
 
 # Install gscam2 deps
 RUN apt-get update \
@@ -27,9 +27,8 @@ RUN apt-get update \
     libgstreamer-plugins-base1.0-dev \
     && apt-get autoremove -y \
     && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/* \
-    && pip3 install --no-cache-dir setuptools==79.0.1 pip packaging -U
-
+    && rm -rf /var/lib/apt/lists/*
+    
 # Install ping-python from source (Newer commits don't seem to work with the ping1d)
 RUN cd /root/ \
     && git clone https://github.com/bluerobotics/ping-python.git -b deployment \
@@ -40,7 +39,7 @@ RUN cd /root/ \
 # Build ROS2 workspace with remaining packages
 COPY ros2_ws /root/ros2_ws
 RUN cd /root/ros2_ws/ \
-    && python3 -m pip install --no-cache-dir -r src/mavros_control/requirements.txt \
+    && pip3 install --no-cache-dir -r src/mavros_control/requirements.txt \
     && git clone https://github.com/ptrmu/ros2_shared.git --depth 1 src/ros2_shared \
     && apt-get update \
     && rosdep install --from-paths src --ignore-src -r -y \
