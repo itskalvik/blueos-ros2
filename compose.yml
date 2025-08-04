@@ -13,7 +13,7 @@ services:
       - XDG_RUNTIME_DIR
 
     volumes:
-      - ./ros2_ws/:/root/ros2_ws/
+      - ./ros2_ws/src/:/root/ros2_ws/src/
 
     ports:
       - "4717:4717"
