@@ -76,8 +76,9 @@ LABEL permissions='{\
     ],\
     "Privileged": true,\
     "NetworkMode": "host",\
-    "CpuQuota": 100000,\
-    "CpuPeriod": 100000\
+    "CpuQuota": 200000,\
+    "CpuPeriod": 100000,\
+    "Memory": 1097152000\
   },\
   "Env": [\
   ]\
