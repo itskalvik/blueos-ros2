@@ -63,10 +63,10 @@ You can install the ROS 2 Extension directly from the BlueOS App Store.
 <img src=".assets/usage.gif" width="100%"/> 
 </p>
 
-## 🛠️ Building the Docker Container Locally
-To build the container for multiple architectures (`arm64`, `amd64`), follow these steps:
+## 🛠️ Building/Running the Extension Locally
+To build the extension for multiple architectures (`arm64`, `amd64`) using [docker](https://www.docker.com/), follow these steps:
 
-### 1. Set up a multi-architecture builder:
+### 1. Set up a multi-architecture builder
 
 ```bash
 docker buildx create --name multi-arch \
@@ -75,10 +75,48 @@ docker buildx create --name multi-arch \
 docker buildx use multi-arch
 ```
 
-### 2. Clone the repository and build the container:
+### 2. Clone the repository and build the container
 
 ```bash
 git clone --recurse-submodules https://github.com/itskalvik/blueos-ros2
 cd blueos-ros2
 docker compose build
 ```
+
+### 3. Run the container
+
+```bash
+docker compose up -d
+```
+
+The extension can then be accessed from a browser at the following url: 
+[http://localhost:4717/](http://localhost:4717/)
+
+## 🤓 Manually Installing the Extension in BlueOS
+
+* Connect to BlueOS in a browser (e.g. via WifiAP use [http://blueos-hotspot.local/](http://blueos-hotspot.local/), if on same network use [http://blueos-avahi.local/](http://blueos-avahi.local/))
+* Open BlueOS Extensions tab, select `INSTALLED` tab
+  * Push "+" button on the bottom right
+  * Under "Create Extension" fill in these fields
+    * Extension Identifier: ```ItsKalvik.ROS2```
+    * Extension Name: ```ROS2```
+    * Docker image: ```YOURDOCKERHUBUSER/YOURDOCKERHUBREPO```
+    * Docker tag: ```latest```
+    * Original Settings:
+      ```bash
+      {
+        "NetworkMode": "host",
+        "HostConfig": {
+          "Binds": [
+            "/dev:/dev:rw",
+            "/usr/blueos/extensions/ros2/:/root/persistent_ws/:rw"
+          ],
+          "Privileged": true,
+          "NetworkMode": "host",
+          "CpuQuota": 100000,
+          "CpuPeriod": 100000
+        },
+        "Env": []
+      }
+      ```
+    * Click ```CREATE``` to install the extension

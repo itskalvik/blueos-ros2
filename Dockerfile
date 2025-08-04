@@ -75,7 +75,9 @@ LABEL permissions='{\
       "/usr/blueos/extensions/ros2/:/root/persistent_ws/:rw"\
     ],\
     "Privileged": true,\
-    "NetworkMode": "host"\
+    "NetworkMode": "host",\
+    "CpuQuota": 100000,\
+    "CpuPeriod": 100000\
   },\
   "Env": [\
   ]\
@@ -98,9 +100,12 @@ LABEL tags='[\
   "sonar",\
   "camera",\
   "foxglove",\
-  "ardusub",\
-  "blueos",\
-  "robot"\
+  "navigation",\
+  "mapping",\
+  "data-collection",\
+  "communication",\
+  "interaction",\
+  "positioning"\
 ]'
 
 # Keep bash alive even if there is an error
