@@ -7,7 +7,7 @@ The BlueOS ROS2 Extension bridges the [BlueOS](https://bluerobotics.com/blueos-c
 
 This extension provides drivers and tools for controlling vehicles and visualizing onboard sensor data. It simplifies the process of setting up a ROS 2 environment for marine robotics by offering pre-configured packages for sonar, cameras, and vehicle control—ready to use out of the box.
 
-In addition, it includes a web-based terminal for convenient access to the ROS 2 environment and integrates seamlessly with Foxglove for browser-based data visualization.
+In addition, it includes a web-based terminal for convenient access to the ROS 2 environment and integrates seamlessly with **Foxglove** for browser-based data visualization.
 
 <p align="center">
 <img src=".assets/demo.gif" width="50%"/> 
@@ -19,32 +19,41 @@ This extension includes the following [ROS 2 Jazzy](https://docs.ros.org/en/jazz
 
 - **[mavros_control](https://github.com/itskalvik/mavros_control)**
 
-  A Python-based control interface using [MAVROS](https://github.com/mavlink/mavros). Supports GPS waypoint navigation (BlueBoat) and RC control (BlueROV2). Includes methods for arming/disarming, takeoff/landing, home location setting, and waypoint following. Skip the boilerplate—subclass or reuse it directly!
+  A Python-based control interface built on [MAVROS](https://github.com/mavlink/mavros)
+  * Supports GPS waypoint navigation (BlueBoat) and RC control (BlueROV2)
+  * Includes methods for arming/disarming, takeoff/landing, setting home location, and waypoint following
+  * Easily subclass or use as-is to skip writing repetitive boilerplate code
 
 - **[gscam2](https://github.com/clydemcqueen/gscam2)**
 
-  A ROS 2 camera driver for GStreamer-based video streams. Supports intra-process communication for performance.
+  A ROS 2 driver for GStreamer-based video streams, with support for intra-process communication to maximize performance.
 
 - **[bluerobotics_sonar](https://github.com/itskalvik/bluerobotics_sonar)**
 
-  Drivers for the Blue Robotics Ping1D altimeter and Ping360 scanning sonar. Includes nodes for hardware interfacing and data visualization.
+  Drivers for Blue Robotics Ping1D altimeter and Ping360 scanning sonar.
+  * Nodes for direct hardware interfacing and real-time data visualization
 
 - **[sonoptix_sonar](https://github.com/itskalvik/sonoptix_sonar)**
 
-  Provides drivers and data processing for the Sonoptix Echo sonar. Captures raw data and converts it into polar images for visualization.
+  Drivers and data processing tools for the Sonoptix Echo sonar.
+  * Nodes for direct hardware interfacing and real-time data visualization
 
 - **[ros-foxglove-bridge](https://app.foxglove.dev/)**
 
-  A WebSocket-based bridge to visualize ROS 2 data in the Foxglove web interface. Compatible with the BlueOS Foxglove plugin.
+  A WebSocket bridge to stream ROS 2 data into the Foxglove web interface.
+  * Fully compatible with the BlueOS Foxglove plugin
+
 
 ## 📋 Prerequisites
 
 - A 64-bit version of [BlueOS](https://github.com/bluerobotics/BlueOS) is required. 
-Get the latest image for Raspberry Pi from [BlueOS releases](https://github.com/bluerobotics/BlueOS/releases/).
+
+  👉 Download the latest Raspberry Pi image from the [BlueOS Releases page](https://github.com/bluerobotics/BlueOS/releases/).
 
 
 ## 🧰 Installation
-You can install the ROS 2 Extension directly from the BlueOS App Store.
+You can install the ROS 2 Extension directly from the **BlueOS App Store**
+
 
 <p align="center">
 <img src=".assets/installation.gif" width="100%"/> 
@@ -52,21 +61,23 @@ You can install the ROS 2 Extension directly from the BlueOS App Store.
 
 
 ## ⚙️ Usage
-- BlueOS automatically launches the extension on boot.
+- **Automatic Launch:** The extension launches automatically when BlueOS boots.
+- **Web Terminal:** Access the extension’s terminal via the left-hand panel in the BlueOS UI.
+- **Persistent Storage:** The extension links the following directories
+  - Host path: ```/usr/blueos/extensions/ros2/```
+  - Container path: ```/root/persistent_ws/```
 
-- The extension's terminal is accessible from the left-hand panel of the BlueOS interface.
-
-- The extension mounts the host directory ```/usr/blueos/extensions/ros2/``` to the container path ```/root/persistent_ws/```
-  Use this folder to store files that should persist across reboots, such as custom ROS 2 workspaces or configurations.
+  Use this to store files like custom ROS 2 workspaces or configuration files that need to survive reboots.
 
 <p align="center">
 <img src=".assets/usage.gif" width="100%"/> 
 </p>
 
-## 🛠️ Building/Running the Extension Locally
-To build the extension for multiple architectures (`arm64`, `amd64`) using [docker](https://www.docker.com/), follow these steps:
+## 🛠️ Build and Run Locally
 
-### 1. Set up a multi-architecture builder
+To build the extension for multiple architectures (`arm64`, `amd64`) using [Docker](https://www.docker.com/):
+
+### 1. Set Up Multi-Architecture Builder
 
 ```bash
 docker buildx create --name multi-arch \
@@ -75,7 +86,7 @@ docker buildx create --name multi-arch \
 docker buildx use multi-arch
 ```
 
-### 2. Clone the repository and build the container
+### 2. Clone the Repository and Build the Container
 
 ```bash
 git clone --recurse-submodules https://github.com/itskalvik/blueos-ros2
@@ -83,27 +94,27 @@ cd blueos-ros2
 docker compose build
 ```
 
-### 3. Run the container
+### 3. Run the Container
 
 ```bash
 docker compose up -d
 ```
 
-The extension can then be accessed from a browser at the following url: 
-[http://localhost:4717/](http://localhost:4717/)
+The extension will be accessible at: [http://localhost:4717/](http://localhost:4717/)
 
-## 🤓 Manually Installing the Extension in BlueOS
+## 🤓 Manual Installation in BlueOS
 
-* Connect to BlueOS in a browser (e.g. via WifiAP use [http://blueos-hotspot.local/](http://blueos-hotspot.local/), if on same network use [http://blueos-avahi.local/](http://blueos-avahi.local/))
-* Open BlueOS Extensions tab, select `INSTALLED` tab
-  * Push "+" button on the bottom right
-  * Under "Create Extension" fill in these fields
+* Connect to BlueOS in your browser:
+  * Via Wi-Fi AP: [http://blueos-hotspot.local/](http://blueos-hotspot.local/)
+  * On the same network: [http://blueos-avahi.local/](http://blueos-avahi.local/)
+* Navigate to the ```Extensions``` tab, then switch to the ```INSTALLED``` tab.
+* Click the ```+``` button (bottom-right), and fill in the fields:
     * Extension Identifier: ```ItsKalvik.ROS2```
     * Extension Name: ```ROS2```
     * Docker image: ```YOURDOCKERHUBUSER/YOURDOCKERHUBREPO```
     * Docker tag: ```latest```
     * Original Settings:
-      ```bash
+      ```json
       {
         "NetworkMode": "host",
         "HostConfig": {
@@ -119,4 +130,4 @@ The extension can then be accessed from a browser at the following url:
         "Env": []
       }
       ```
-    * Click ```CREATE``` to install the extension
+* Click ```CREATE``` to complete the installation.
