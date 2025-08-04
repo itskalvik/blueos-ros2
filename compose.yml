@@ -1,6 +1,6 @@
 services:
   ros2:
-    image: itskalvik/blueos-ros2:beta
+    image: itskalvik/blueos-ros2:0.0.4
     build:
       context: ./
       dockerfile: Dockerfile
