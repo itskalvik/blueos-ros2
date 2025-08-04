@@ -66,7 +66,7 @@ COPY files/register_service /site/register_service
 COPY files/start.sh /start.sh
 
 # Add docker configuration
-LABEL version="0.0.4"
+LABEL version="0.1.0"
 LABEL permissions='{\
   "NetworkMode": "host",\
   "HostConfig": {\
