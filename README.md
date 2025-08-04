@@ -60,7 +60,7 @@ You can install the ROS 2 Extension directly from the BlueOS App Store.
   Use this folder to store files that should persist across reboots, such as custom ROS 2 workspaces or configurations.
 
 <p align="center">
-<img src=".assets/demo.gif" width="50%"/> 
+<img src=".assets/usage.gif" width="100%"/> 
 </p>
 
 ## 🛠️ Building the Docker Container Locally
