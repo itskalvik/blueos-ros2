@@ -15,7 +15,7 @@ In addition, it includes a web-based terminal for convenient access to the ROS 2
 
 # 🚀 Features
 
-This extension includes the following ROS 2 packages:
+This extension includes the following [ROS 2 Jazzy](https://docs.ros.org/en/jazzy/index.html) packages:
 
 - **[mavros_control](https://github.com/itskalvik/mavros_control)**
 
