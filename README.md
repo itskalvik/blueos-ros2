@@ -40,7 +40,7 @@ This extension includes the following ROS 2 packages:
 ## 📋 Prerequisites
 
 - A 64-bit version of [BlueOS](https://github.com/bluerobotics/BlueOS) is required. 
-Get the latest image for Raspberry Pi from the [BlueOS releases](https://github.com/bluerobotics/BlueOS/releases/).
+Get the latest image for Raspberry Pi from [BlueOS releases](https://github.com/bluerobotics/BlueOS/releases/).
 
 
 ## 🧰 Installation
