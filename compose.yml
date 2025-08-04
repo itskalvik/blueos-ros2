@@ -1,6 +1,6 @@
 services:
   ros2:
-    image: itskalvik/blueos-ros2:0.0.4
+    image: itskalvik/blueos-ros2:beta
     build:
       context: ./
       dockerfile: Dockerfile
@@ -13,13 +13,10 @@ services:
       - XDG_RUNTIME_DIR
 
     volumes:
-      - ./ros2_ws/:/home/ros2_ws/
+      - ./ros2_ws/:/root/ros2_ws/
 
     ports:
       - "4717:4717"
-      - "88:88"
-      - "8080:8080"
-      - "9000:9000"
 
     #network_mode: host
     privileged: true
